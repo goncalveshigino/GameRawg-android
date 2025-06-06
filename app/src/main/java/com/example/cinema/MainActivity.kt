@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.cinema.navigation.NavManager
 import com.example.cinema.ui.theme.CinemaTheme
 import com.example.cinema.view.HomeView
 import com.example.cinema.viewModel.GamesViewModel
@@ -32,7 +33,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomeView(viewModel)
+                    NavManager(viewModel)
                 }
             }
         }

@@ -16,25 +16,28 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.cinema.components.CardGame
-import com.example.cinema.components.MainToBar
+import com.example.cinema.components.MainTopBar
 import com.example.cinema.ui.theme.CinemaTheme
 import com.example.cinema.util.Constants.Companion.CUSTOM_BLACK
 import com.example.cinema.viewModel.GamesViewModel
 
 @Composable
-fun HomeView(viewModel: GamesViewModel) {
+fun HomeView(viewModel: GamesViewModel, navController: NavController) {
     Scaffold(
         topBar = {
-            MainToBar(title = "API GAMES") { }
+            MainTopBar(title = "API GAMES", onClickBackButton = {}) {
+                navController.navigate("SearchGameView")
+            }
         }
     ) {
-        ContentHomeView(viewModel, it)
+        ContentHomeView(viewModel, it, navController)
     }
 }
 
 @Composable
-fun ContentHomeView(viewModel: GamesViewModel, pad: PaddingValues) {
+fun ContentHomeView(viewModel: GamesViewModel, pad: PaddingValues, navController: NavController) {
     val games by viewModel.games.collectAsState()
 
     LazyColumn(
@@ -43,7 +46,7 @@ fun ContentHomeView(viewModel: GamesViewModel, pad: PaddingValues) {
     ) {
         items(games) { item ->
             CardGame(item) {
-
+                navController.navigate("DetailView/${item.id}")
             }
 
             Text(
